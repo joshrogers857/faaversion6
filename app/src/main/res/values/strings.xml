@@ -2,4 +2,8 @@
     <string name="app_name">Feline Adoption Agency</string>
     <string name="home">Home</string>
     <string name="cats">Cats</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="framentHome">Fragment home</string>
+    <string name="fragmentCats">Fragment cats</string>
 </resources>

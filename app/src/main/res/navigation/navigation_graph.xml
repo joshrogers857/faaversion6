@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@+id/navigation_home">
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="uk.ac.aber.dcs.cs31620.faa.ui.home.HomeFragment"
+        android:label="@string/framentHome"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/navigation_cats"
+        android:name="uk.ac.aber.dcs.cs31620.faa.ui.cats.CatsFragment"
+        android:label="@string/fragmentCats"
+        tools:layout="@layout/fragment_cats" />
+</navigation>
