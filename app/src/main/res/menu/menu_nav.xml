@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group xmlns:android="http://schemas.android.com/apk/res/android"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_login"
+            android:checked="true"
+            android:icon="@drawable/ic_baseline_power_settings_new_24"
+            android:title="@string/nav_login" />
+    </group>
+
+    <item android:title="@string/nav_support">
+        <menu>
+            <item
+                android:id="@+id/nav_help"
+                android:icon="@drawable/ic_baseline_help_24"
+                android:title="@string/nav_help" />
+            <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_baseline_feedback_24"
+                android:title="@string/nav_feedback" />
+        </menu>
+    </item>
+</menu>
