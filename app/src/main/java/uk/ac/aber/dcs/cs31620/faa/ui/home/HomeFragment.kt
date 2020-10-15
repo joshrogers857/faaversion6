@@ -6,14 +6,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import uk.ac.aber.dcs.cs31620.faa.R
+import uk.ac.aber.dcs.cs31620.faa.databinding.FragmentHomeBinding
+import uk.ac.aber.dcs.cs31620.faa.model.CatList
+import kotlin.random.Random
 
 class HomeFragment : Fragment() {
+
+    private lateinit var  homeFragmentBinding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        homeFragmentBinding = FragmentHomeBinding.inflate(inflater, container, false)
+        val catList = CatList()
+        val listOfCats = catList.cats
+        val catPos = Random.nextInt(listOfCats.size)
+
+        val featuredCatImg = homeFragmentBinding.featuredImage
+        featuredCatImg.setImageResource(listOfCats[catPos].resourceId)
+
+        return homeFragmentBinding.root
     }
 
 }
