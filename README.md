@@ -1,9 +1,9 @@
 # README
 
-Code for the CS31620 FAA (Feline Adoption Agency) app, version 2. This is currently in development. Please don't use.
+Code for the CS31620 FAA (Feline Adoption Agency) app, version 3. This is currently in development. Please don't use.
 
 This is a Kotlin project.
 
-This is version 2 developed by students in workshop 8.
+This is version 3 developed by students in workshop 9.
 
-This adds navigation drawer, bottom navigation bar and uses Navigation UI framework to navigate to two empty fragments.
+This adds content for the Home screen fragment, scrolling and a collapsable Toolbar
