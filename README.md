@@ -6,4 +6,4 @@ This is a Kotlin project.
 
 This is version 3 developed by students in workshop 9.
 
-This adds content for the Home screen fragment, scrolling and app icons.
+This adds content for the Home screen fragment, scrolling, collapsing Toolbar and app icons.
