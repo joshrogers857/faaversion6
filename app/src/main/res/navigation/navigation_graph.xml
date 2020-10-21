@@ -8,7 +8,8 @@
         android:id="@+id/navigation_home"
         android:name="uk.ac.aber.dcs.cs31620.faa.ui.home.HomeFragment"
         android:label="@string/framentHome"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+    </fragment>
     <fragment
         android:id="@+id/navigation_cats"
         android:name="uk.ac.aber.dcs.cs31620.faa.ui.cats.CatsFragment"

@@ -1,3 +1,9 @@
+/**
+ * The main activity for the app. Activates
+ * a Toolbar, NavigationDrawer and BottomNavigationView
+ * @author Chris Loftus
+ * @version 2
+ */
 package uk.ac.aber.dcs.cs31620.faa.ui
 
 import android.os.Bundle

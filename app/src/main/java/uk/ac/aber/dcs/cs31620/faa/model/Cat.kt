@@ -1,3 +1,8 @@
+/**
+ * Represents a Cat
+ * @author Chris Loftus
+ * @version 1
+ */
 package uk.ac.aber.dcs.cs31620.faa.model
 
 import java.time.LocalDate

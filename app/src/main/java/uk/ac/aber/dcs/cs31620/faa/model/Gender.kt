@@ -1,3 +1,8 @@
+/**
+ * Represents Cat gender
+ * @author Chris Loftus
+ * @version 1
+ */
 package uk.ac.aber.dcs.cs31620.faa.model
 
 enum class Gender {

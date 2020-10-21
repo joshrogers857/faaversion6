@@ -20,4 +20,36 @@
     <string name="featured_cat_description">Images of this month\'s featured cat</string>
     <string name="featured_cat_title">This month\'s featured cat:</string>
 
+    <string name="distance">Search dist.(miles): %1$d</string>
+    <string name="proximity_dialog_title">Choose value</string>
+    <string name="choose_dialog_title">Choose a value</string>
+    <string name="ok_button_text">OK</string>
+    <string name="cancel_button_text">Cancel</string>
+    <string name="max_distance_text">Enter maximum search distance</string>
+
+    <!-- Arrays of values -->
+    <string-array name="gender_array">
+        <item>Any gender</item>
+        <item>Female</item>
+        <item>Male</item>
+    </string-array>
+
+    <string-array name="age_range_array">
+        <item>Any age</item>
+        <item>Up to 1 year</item>
+        <item>1 &#8211; 2 years</item>
+        <item>2 &#8211; 5 years</item>
+        <item>Over 5 years</item>
+    </string-array>
+
+    <string-array name="breed_array">
+        <item>Any breed</item>
+        <item>Abyssinian</item>
+        <item>Balinese</item>
+        <item>Bengal</item>
+        <item>Birman</item>
+        <item>British Shorthair</item>
+        <item>Other</item>
+    </string-array>
+
 </resources>

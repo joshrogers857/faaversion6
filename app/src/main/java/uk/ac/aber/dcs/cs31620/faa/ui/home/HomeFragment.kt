@@ -1,3 +1,10 @@
+/**
+ * Represents the home page. Currently shows some
+ * static text an ImageView and a randomly selected
+ * featured cat. Data is hard coded.
+ * @author Chris Loftus
+ * @version 2
+ */
 package uk.ac.aber.dcs.cs31620.faa.ui.home
 
 import android.os.Bundle
