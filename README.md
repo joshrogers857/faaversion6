@@ -1,6 +1,6 @@
 # README
 
-Code for the CS31620 FAA (Feline Adoption Agency) app, version 4. Currently in development, do not use.`
+Code for the CS31620 FAA (Feline Adoption Agency) app, version 4. 
 
 This is a Kotlin project.
 
