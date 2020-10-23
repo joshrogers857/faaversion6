@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/catCard"
+    android:layout_width="match_parent"
+    android:layout_height="215dp"
+    android:padding="4dp"
+    app:cardBackgroundColor="@color/cardBackground"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="4dp"
+    android:layout_margin="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/catImageView"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/inmate_image_description"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/catNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/default_cat_name"
+            android:layout_alignStart="@+id/catImageView"
+            android:layout_below="@+id/catImageView"
+            android:textAppearance="@style/MyTextAppearance"
+            app:layout_constraintTop_toBottomOf="@+id/catImageView"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/catDeleteImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/delete_button_description"
+            android:padding="0dp"
+            android:src="@drawable/ic_delete_forever_black_24dp"
+            android:tint="?colorAccent"
+            app:layout_constraintTop_toBottomOf="@+id/catImageView"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -27,6 +27,10 @@
     <string name="cancel_button_text">Cancel</string>
     <string name="max_distance_text">Enter maximum search distance</string>
 
+    <string name="inmate_image_description">Picture of one of the cats</string>
+    <string name="delete_button_description">Delete cat button</string>
+    <string name="default_cat_name">Cat clone</string>
+
     <!-- Arrays of values -->
     <string-array name="gender_array">
         <item>Any gender</item>

@@ -3,8 +3,10 @@
  * and a TextView to allow searching in a later version.
  * Screen state is made persistent. A DialogFragment is used
  * to input search distance.
+ * Also shows RecyclerView grid of cats, a FloatingActionButton
+ * and a Snackbar.
  * @author Chris Loftus
- * @version 2
+ * @version 3
  */
 package uk.ac.aber.dcs.cs31620.faa.ui.cats
 
@@ -14,10 +16,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import uk.ac.aber.dcs.cs31620.faa.R
 import uk.ac.aber.dcs.cs31620.faa.databinding.FragmentCatsBinding
+import uk.ac.aber.dcs.cs31620.faa.model.CatList
 
 private const val PROXIMITY_KEY = "proximity"
+
+private const val GRID_COLUMN_COUNT = 2
 
 class CatsFragment : Fragment(), NumberPicker.OnValueChangeListener {
     private lateinit var catsFragmentBinding: FragmentCatsBinding
@@ -30,6 +38,68 @@ class CatsFragment : Fragment(), NumberPicker.OnValueChangeListener {
     ): View? {
         catsFragmentBinding = FragmentCatsBinding.inflate(inflater, container, false)
 
+        setupSearchFields()
+
+        restoreInstanceState(savedInstanceState)
+
+        addCatsRecyclerView()
+
+        addSnackbar()
+
+        return catsFragmentBinding.root
+    }
+
+    private fun addSnackbar() {
+        val fab = catsFragmentBinding.fabAdd
+
+        fab.setOnClickListener { v ->
+
+            val content: View = catsFragmentBinding.catsContent
+            val snackbar = Snackbar.make(content, "Create cat FAB", Snackbar.LENGTH_LONG)
+
+            // Obtain the BottomNavigationView from the parent activity so that we
+            // can anchor to it
+            val bnv = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav_view)
+            snackbar.anchorView = bnv
+
+            snackbar.setAction("Undo") { v ->
+                // Code to handle undo goes here
+            }
+            snackbar.show()
+        }
+    }
+
+    private fun addCatsRecyclerView() {
+        val listCats = catsFragmentBinding.catList
+        listCats.setHasFixedSize(true)
+
+        val gridLayoutManager = GridLayoutManager(context, GRID_COLUMN_COUNT)
+        listCats.layoutManager = gridLayoutManager
+
+        val cats = CatList().cats
+        val catsRecyclerAdapter = CatsRecyclerWithListAdapter(context, cats.toMutableList())
+        listCats.adapter = catsRecyclerAdapter
+
+        catsRecyclerAdapter.clickListener = View.OnClickListener { v ->
+            val nameView: TextView = v.findViewById(R.id.catNameTextView)
+            Toast.makeText(context, "Cat ${nameView.text} clicked", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun restoreInstanceState(savedInstanceState: Bundle?) {
+        savedInstanceState?.let {
+            proximityValue = it.getInt(
+                PROXIMITY_KEY,
+                this.resources.getInteger(R.integer.min_proximity_distance)
+            )
+        } ?: run {
+            proximityValue =
+                this.resources.getInteger(R.integer.min_proximity_distance)
+        }
+        proximityButton.text = this.getString(R.string.distance, proximityValue)
+    }
+
+    private fun setupSearchFields() {
         setupSpinner(
             view,
             catsFragmentBinding.breedsSpinner,
@@ -50,17 +120,6 @@ class CatsFragment : Fragment(), NumberPicker.OnValueChangeListener {
         proximityButton.setOnClickListener { v ->
             showNumberPicker(v, getString(R.string.proximity_dialog_title))
         }
-
-        savedInstanceState?.let {
-            proximityValue = it.getInt(PROXIMITY_KEY,
-                                       this.resources.getInteger(R.integer.min_proximity_distance))
-        } ?: run {
-            proximityValue =
-                this.resources.getInteger(R.integer.min_proximity_distance)
-        }
-        proximityButton.text = this.getString(R.string.distance, proximityValue)
-
-        return catsFragmentBinding.root
     }
 
     private fun showNumberPicker(v: View, title: String) {
