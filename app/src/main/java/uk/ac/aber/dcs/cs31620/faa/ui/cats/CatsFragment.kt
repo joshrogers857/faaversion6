@@ -53,9 +53,7 @@ class CatsFragment : Fragment(), NumberPicker.OnValueChangeListener {
         val fab = catsFragmentBinding.fabAdd
 
         fab.setOnClickListener { v ->
-
-            val content: View = catsFragmentBinding.catsContent
-            val snackbar = Snackbar.make(content, "Create cat FAB", Snackbar.LENGTH_LONG)
+            val snackbar = Snackbar.make(v, "Create cat FAB", Snackbar.LENGTH_LONG)
 
             // Obtain the BottomNavigationView from the parent activity so that we
             // can anchor to it
