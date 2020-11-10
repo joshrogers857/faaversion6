@@ -52,15 +52,15 @@ class CatsFragment : Fragment(), NumberPicker.OnValueChangeListener {
     private fun addSnackbar() {
         val fab = catsFragmentBinding.fabAdd
 
-        fab.setOnClickListener { v ->
-            val snackbar = Snackbar.make(v, "Create cat FAB", Snackbar.LENGTH_LONG)
+        fab.setOnClickListener {
+            val snackbar = Snackbar.make(it, "Create cat FAB", Snackbar.LENGTH_LONG)
 
             // Obtain the BottomNavigationView from the parent activity so that we
             // can anchor to it
             val bnv = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_nav_view)
             snackbar.anchorView = bnv
 
-            snackbar.setAction("Undo") { v ->
+            snackbar.setAction("Undo") {
                 // Code to handle undo goes here
             }
             snackbar.show()
