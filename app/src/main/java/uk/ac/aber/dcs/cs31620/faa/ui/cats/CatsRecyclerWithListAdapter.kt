@@ -36,7 +36,7 @@ class CatsRecyclerWithListAdapter(
 
         fun bindDataSet(cat: Cat) {
             nameView.text = cat.name
-            imageView.setImageDrawable(AppCompatResources.getDrawable(context!!, cat.resourceId))
+            //imageView.setImageDrawable(AppCompatResources.getDrawable(context!!, cat.resourceId))
         }
     }
 

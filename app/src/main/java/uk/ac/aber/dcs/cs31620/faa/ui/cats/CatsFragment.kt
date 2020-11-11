@@ -21,7 +21,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import uk.ac.aber.dcs.cs31620.faa.R
 import uk.ac.aber.dcs.cs31620.faa.databinding.FragmentCatsBinding
-import uk.ac.aber.dcs.cs31620.faa.model.CatList
 
 private const val PROXIMITY_KEY = "proximity"
 
@@ -74,14 +73,14 @@ class CatsFragment : Fragment(), NumberPicker.OnValueChangeListener {
         val gridLayoutManager = GridLayoutManager(context, GRID_COLUMN_COUNT)
         listCats.layoutManager = gridLayoutManager
 
-        val cats = CatList().cats
+        /* val cats = CatList().cats
         val catsRecyclerAdapter = CatsRecyclerWithListAdapter(context, cats.toMutableList())
         listCats.adapter = catsRecyclerAdapter
 
         catsRecyclerAdapter.clickListener = View.OnClickListener { v ->
             val nameView: TextView = v.findViewById(R.id.catNameTextView)
             Toast.makeText(context, "Cat ${nameView.text} clicked", Toast.LENGTH_SHORT).show()
-        }
+        } */
     }
 
     private fun restoreInstanceState(savedInstanceState: Bundle?) {

@@ -12,10 +12,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import uk.ac.aber.dcs.cs31620.faa.R
 import uk.ac.aber.dcs.cs31620.faa.databinding.FragmentHomeBinding
-import uk.ac.aber.dcs.cs31620.faa.model.CatList
-import kotlin.random.Random
+import uk.ac.aber.dcs.cs31620.faa.datasource.FaaRepository
+import java.time.LocalDateTime
 
 class HomeFragment : Fragment() {
 
@@ -26,12 +25,16 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         homeFragmentBinding = FragmentHomeBinding.inflate(inflater, container, false)
-        val catList = CatList()
-        val listOfCats = catList.cats
-        val catPos = Random.nextInt(listOfCats.size)
+        //val catList = CatList()
+        //val listOfCats = catList.cats
+        //val catPos = Random.nextInt(listOfCats.size)
 
-        val featuredCatImg = homeFragmentBinding.featuredImage
-        featuredCatImg.setImageResource(listOfCats[catPos].resourceId)
+        // val featuredCatImg = homeFragmentBinding.featuredImage
+        //featuredCatImg.setImageResource(listOfCats[catPos].resourceId)
+
+        val repository = FaaRepository(requireActivity().application)
+        val past = LocalDateTime.now().minusDays(30)
+        val recentCats = repository.getRecentCatsSync(past, LocalDateTime.now())
 
         return homeFragmentBinding.root
     }
