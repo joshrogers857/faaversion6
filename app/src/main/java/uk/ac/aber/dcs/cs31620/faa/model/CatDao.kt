@@ -27,9 +27,6 @@ interface CatDao {
     @Query("DELETE FROM cats")
     fun deleteAll()
 
-    @Query("SELECT * FROM cats WHERE id = :id")
-    fun fetchCatByCatId(id: Int): Cat
-
     @Query("SELECT * FROM cats")
     fun getAllCats(): LiveData<List<Cat>>
 
