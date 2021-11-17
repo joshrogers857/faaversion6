@@ -19,13 +19,13 @@ class FaaRepository(application: Application) {
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     fun insert(cat: Cat){
-        coroutineScope.launch() {
+        coroutineScope.launch {
             catDao.insertSingleCat(cat)
         }
     }
 
     fun insertMultipleCats(cats: List<Cat>){
-        coroutineScope.launch() {
+        coroutineScope.launch {
             catDao.insertMultipleCats(cats)
         }
     }
