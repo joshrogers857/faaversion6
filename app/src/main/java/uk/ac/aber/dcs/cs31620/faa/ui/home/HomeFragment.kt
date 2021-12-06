@@ -7,14 +7,20 @@
  */
 package uk.ac.aber.dcs.cs31620.faa.ui.home
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import uk.ac.aber.dcs.cs31620.faa.databinding.FragmentHomeBinding
 import uk.ac.aber.dcs.cs31620.faa.datasource.FaaRepository
+import uk.ac.aber.dcs.cs31620.faa.model.RecentCatsViewModel
 import java.time.LocalDateTime
+import kotlin.random.Random
 
 class HomeFragment : Fragment() {
 
@@ -25,16 +31,22 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         homeFragmentBinding = FragmentHomeBinding.inflate(inflater, container, false)
-        //val catList = CatList()
-        //val listOfCats = catList.cats
-        //val catPos = Random.nextInt(listOfCats.size)
 
-        // val featuredCatImg = homeFragmentBinding.featuredImage
-        //featuredCatImg.setImageResource(listOfCats[catPos].resourceId)
+        val featuredCatImg = homeFragmentBinding.featuredImage
+        val catViewModel: RecentCatsViewModel by viewModels()
+        val recentCats = catViewModel.recentCats
 
-        val repository = FaaRepository(requireActivity().application)
-        val past = LocalDateTime.now().minusDays(30)
-        val recentCats = repository.getRecentCatsSync(past, LocalDateTime.now())
+        recentCats.observe(viewLifecycleOwner) {
+            if(it.isNotEmpty()) {
+                val catPos = Random.nextInt(it.size)
+                val catImage = it[catPos].imagePath
+                Log.i("FAA", it.size.toString())
+
+                if(catImage.isNotEmpty()) {
+                    Glide.with(this).load(Uri.parse("file:///android_asset/images/${catImage}")).into(featuredCatImg)
+                }
+            }
+        }
 
         return homeFragmentBinding.root
     }
