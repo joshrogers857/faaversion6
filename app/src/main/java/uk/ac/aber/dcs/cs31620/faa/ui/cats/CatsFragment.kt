@@ -16,11 +16,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import uk.ac.aber.dcs.cs31620.faa.R
 import uk.ac.aber.dcs.cs31620.faa.databinding.FragmentCatsBinding
+import uk.ac.aber.dcs.cs31620.faa.model.Cat
+import uk.ac.aber.dcs.cs31620.faa.model.CatsViewModel
 
 private const val PROXIMITY_KEY = "proximity"
 
@@ -30,6 +34,9 @@ class CatsFragment : Fragment(), NumberPicker.OnValueChangeListener {
     private lateinit var catsFragmentBinding: FragmentCatsBinding
     private lateinit var proximityButton: TextView
     private var proximityValue: Int = 0
+    private val catViewModel: CatsViewModel by viewModels()
+    private lateinit var catsRecyclerAdapter: CatsRecyclerWithListAdapter
+    private var oldCatList: LiveData<List<Cat>>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,14 +80,14 @@ class CatsFragment : Fragment(), NumberPicker.OnValueChangeListener {
         val gridLayoutManager = GridLayoutManager(context, GRID_COLUMN_COUNT)
         listCats.layoutManager = gridLayoutManager
 
-        /* val cats = CatList().cats
-        val catsRecyclerAdapter = CatsRecyclerWithListAdapter(context, cats.toMutableList())
+
+        catsRecyclerAdapter = CatsRecyclerWithListAdapter(context)
         listCats.adapter = catsRecyclerAdapter
 
         catsRecyclerAdapter.clickListener = View.OnClickListener { v ->
             val nameView: TextView = v.findViewById(R.id.catNameTextView)
             Toast.makeText(context, "Cat ${nameView.text} clicked", Toast.LENGTH_SHORT).show()
-        } */
+        }
     }
 
     private fun restoreInstanceState(savedInstanceState: Bundle?) {
@@ -154,7 +161,16 @@ class CatsFragment : Fragment(), NumberPicker.OnValueChangeListener {
                 position: Int,
                 id: Long
             ) {
-                Toast.makeText(context, "Item $id selected", Toast.LENGTH_SHORT).show()
+                val catList = searchForCats()
+
+                if(oldCatList != catList) {
+                    oldCatList?.removeObservers(viewLifecycleOwner)
+                    oldCatList = catList
+                }
+
+                if(!catList.hasObservers()) {
+                    catList.observe(viewLifecycleOwner) { cats -> catsRecyclerAdapter.changeDataSet(cats.toMutableList())}
+                }
             }
         }
     }
@@ -167,6 +183,13 @@ class CatsFragment : Fragment(), NumberPicker.OnValueChangeListener {
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putInt(PROXIMITY_KEY, proximityValue)
         super.onSaveInstanceState(outState)
+    }
+
+    private fun searchForCats(): LiveData<List<Cat>> {
+        val selectedBreed = catsFragmentBinding.breedsSpinner.selectedItem.toString()
+        val selectedGender = catsFragmentBinding.genderSpinner.selectedItem.toString()
+        val selectedAge = catsFragmentBinding.ageSpinner.selectedItem.toString()
+        return catViewModel.getCats(selectedBreed, selectedGender, selectedAge)
     }
 }
 
